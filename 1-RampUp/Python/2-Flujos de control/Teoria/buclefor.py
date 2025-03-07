@@ -5,3 +5,4 @@ for i in range(1, 4):
         # time.sleep(2)
         if i == 2 and j == 2:
             print("Casilla central")
+            
