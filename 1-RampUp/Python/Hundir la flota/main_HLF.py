@@ -1,5 +1,6 @@
 from clases_HLF import *
-from Funciones_HLF import turno_jugador, turno_maquina
+from Funciones_HLF import *
+from variables_HLF import *
 
 def main():
     print("Bienvenido a Hundir la Flota!")
@@ -7,7 +8,7 @@ def main():
     tablero_maquina = Tablero("Máquina")
 
     turno = True  # True: jugador, False: máquina
-    while tablero_jugador.vida > 0 and tablero_maquina.vida > 0:
+    while tablero_jugador.vida> 0 and tablero_maquina.vida > 0:
         if turno:
             if not turno_jugador(tablero_maquina):
                 turno = False
@@ -20,7 +21,10 @@ def main():
     else:
         print("¡Has ganado!")
 
-if __name__ == "__main__":
-    main()
+def jugar():
+    print("Starting the game!")
+
+jugar()  # This will run automatically when you execute main.py
+
 
 

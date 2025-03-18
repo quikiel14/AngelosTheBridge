@@ -1,22 +1,24 @@
-"""import random
+import random
 from variables_HLF import *
+import pprint
 
 class Tablero:
     def __init__(self, id_jugador):
         self.id_jugador = id_jugador
-        self.tablero = [[AGUA for _ in range(TAMANIO_TABLERO)] for _ in range(TAMANIO_TABLERO)]
-        self.tablero_disparos = [[AGUA for _ in range(TAMANIO_TABLERO)] for _ in range(TAMANIO_TABLERO)]
+        self.tablero = [[" " for i in range(TAMANIO_TABLERO)] for j in range(TAMANIO_TABLERO)]
+        self.tablero_disparos = [[" " for _i in range(TAMANIO_TABLERO)] for j in range(TAMANIO_TABLERO)]
         self.barcos = []
         self.vida = sum(BARCOS.values())
         self.colocar_barcos()
-
+    
+    
     def colocar_barcos(self):
         for _, eslora in BARCOS.items():
             colocado = False
             while not colocado:
                 fila = random.randint(0, TAMANIO_TABLERO - 1)
                 columna = random.randint(0, TAMANIO_TABLERO - 1)
-                direccion = random.choice(["H", "V"])
+                direccion = random.choice(["N","S","E","O"])
                 if self.verificar_espacio(fila, columna, eslora, direccion):
                     self.poner_barco(fila, columna, eslora, direccion)
                     colocado = True
@@ -51,38 +53,41 @@ class Tablero:
         if oculto:
             print("\n".join(" ".join(self.tablero_disparos[row]) for row in range(TAMANIO_TABLERO)))
         else:
-            print("\n".join(" ".join(self.tablero[row]) for row in range(TAMANIO_TABLERO)))"""
+            print("\n".join(" ".join(self.tablero[row]) for row in range(TAMANIO_TABLERO)))
+            
+
+"""
+            
+
 import random
-import variables_HLF  # Usa import sin *
+from variables_HLF import * 
 
 class Tablero:
     def __init__(self, id_jugador):
         self.id_jugador = id_jugador
-        self.tablero = [[variables_HLF.AGUA for _ in range(variables_HLF.TAMANIO_TABLERO)] for _ in range(variables_HLF.TAMANIO_TABLERO)]
-        self.tablero_disparos = [[variables_HLF.AGUA for _ in range(variables_HLF.TAMANIO_TABLERO)] for _ in range(variables_HLF.TAMANIO_TABLERO)]
+        self.tablero = [[AGUA for _ in range(TAMANIO_TABLERO)] for _ in range(TAMANIO_TABLERO)]
+        self.tablero_disparos = [[AGUA for _ in range(TAMANIO_TABLERO)] for _ in range(TAMANIO_TABLERO)]
         self.barcos = []
-        self.vida = sum(variables_HLF.BARCOS.values())
+        self.vida = sum(BARCOS.values())
         self.colocar_barcos()
 
     def colocar_barcos(self):
-        for _, eslora in variables_HLF.BARCOS.items():
+        for _, eslora in BARCOS.items():
             colocado = False
             while not colocado:
-                fila = random.randint(0, variables_HLF.TAMANIO_TABLERO - 1)
-                columna = random.randint(0, variables_HLF.TAMANIO_TABLERO - 1)
+                fila = random.randint(0, TAMANIO_TABLERO - 1)
+                columna = random.randint(0, TAMANIO_TABLERO - 1)
                 direccion = random.choice(["H", "V"])
                 if self.verificar_espacio(fila, columna, eslora, direccion):
                     self.poner_barco(fila, columna, eslora, direccion)
                     colocado = True
 
     def recibir_disparo(self, fila, columna):
-        if self.tablero[fila][columna] == variables_HLF.BARCO:
-            self.tablero[fila][columna] = variables_HLF.IMPACTO
+        if self.tablero[fila][columna] == BARCO:
+            self.tablero[fila][columna] = IMPACTO
             self.vida -= 1
             return True
         else:
-            self.tablero[fila][columna] = variables_HLF.FALLO
+            self.tablero[fila][columna] = FALLO
             return False
-
-
-
+        """
