@@ -1,60 +1,89 @@
 import math
 
-def numero_a_dia(numero):
-    dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
-    
-    if 1 <= numero <= 7:
-        return dias[numero - 1]  # Restamos 1 porque las listas en Python empiezan en 0
+def ejercicio_1(dia):
+    dias_semana = {1: "Lunes",
+               2: "Martes",
+               3: "Miércoles",
+               4: "Jueves",
+               5: "Viernes",
+               6: "Sábado",
+               7: "Domingo"}
+    return dias_semana.get(dia, "Día erróneo")
+
+def ejercicio_2(tamaño:int=5):
+    lista_8 = list(range(int(tamaño),0,-1))
+    while len(lista_8) > 0:
+        print(*lista_8)
+        lista_8.pop(0)
+
+def ejercicio_3(num_1, num_2):
+    if num_1 == num_2:
+        out = "Son iguales"
+    elif num_1 > num_2:
+        out = "Primer número mayor que segundo"
     else:
-        return "Número fuera de rango"
+        out = "Segundo número mayor que primero"
+    return out
 
-def piramide(n):
-    for i in range(n, 0, -1):
-        for j in range(i, 0, -1):
-            print(j, end=" ")
-        print()
+def limpieza_texto(texto, dict_vocales={'á':'a',
+                                        'é':'e',
+                                        'í':'i',
+                                        'ó':'o',
+                                        'ú':'u'}):
+    texto = texto.lower()
 
-def comparar_numeros(a, b):
-    if a > b:
-        return "El primer número es mayor que el segundo."
-    elif a < b:
-        return "El segundo número es mayor que el primero."
-    else:
-        return "Los números son iguales."
+    for clave in dict_vocales:
+        texto = texto.replace(clave, dict_vocales[clave])
+    return texto
 
+def ejercicio_4(frase, letra):
+    frase = limpieza_texto(frase)
+    return frase.count(letra.lower())
 
-def area_cuadrado(lado: float) -> float:
-    return lado ** 2
+def ejercicio_5(frase):
 
-def area_triangulo(base: float, altura: float) -> float:
-    return (base * altura) / 2
+    dict_conteo = {}
+    frase = limpieza_texto(frase)
 
-def area_circulo(radio: float) -> float:
-    return math.pi * radio ** 2
+    for caracter in frase:
+        if caracter not in dict_conteo.keys() and caracter not in [" ", ","]:
+            dict_conteo[caracter] = frase.count(caracter)
 
-def fibonacci(n: int) -> int:
-    if n <= 0:
-        raise ValueError("El número debe ser mayor a 0")
-    elif n == 1:
-        return 1
-    elif n == 2:
-        return 1
-    return fibonacci(n - 1) + fibonacci(n - 2)
+    return dict_conteo
 
-def unir_palabras(palabras) -> str:
-    return " ".join(palabras)
-
-def modificar_lista(lista: list, comando: str, elemento=None) -> list:
-    if comando == "add" and elemento is not None:
+def ejercicio_6(lista, comando, elemento=None):
+    if comando == "add":
         lista.append(elemento)
-    elif comando == "remove" and elemento in lista:
-        lista.remove(elemento)
+    elif comando == "remove":
+        try:
+            lista.remove(elemento)
+        except:
+            print("El elemento no se encuentra en la lista")
+    else:
+        print("Comando no reconocido")
     return lista
 
-def contar_letra(texto, letra):
+def ejercicio_7(*args):
+    return " ".join(args)
+
+def fibonacci(n):
+    if n == 0 or n == 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+def cuadrado(l, n=1):
+    return round(n * l ** 2, 2)
+
+def triangulo(b, a):
+    return round(b * a / 2, 2)
+
+def circulo(r):
+    return round(math.pi * r ** 2, 2)
+
+
+
+if __name__ == "__main__":
+    print(triangulo(3,7))
+    print(circulo(10))
+    print()
     
-    #Contador de veces que aparece una letra en un texto, sin distinguir mayúsculas de minúsculas.
-    if len(letra) != 1:
-        raise ValueError("El segundo argumento debe ser una única letra.")
-    
-    return texto.lower().count(letra.lower())
